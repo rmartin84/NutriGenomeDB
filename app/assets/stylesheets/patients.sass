@@ -1,0 +1,308 @@
+// Place all the styles related to the patients controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+body
+  font-size: 4px
+  :font-family 'Lucida Grande',Arial,sans-serif      
+  background-color: #E1E6FA 
+  :text-align center
+  :border 0
+  :padding 0
+
+
+#layout
+  :text-align left
+  :background-color white
+  width: 990px
+  :margin auto
+  
+#ie_warning
+  :display none
+  :margin auto
+  :width auto
+  :text-align center
+  background-color: #E1E6FA
+  span
+    :color red
+
+///* HEADER STYLES */
+#header
+  :position relative
+  background-color: #183152  
+  height: 80px
+  background: image-url('header.png') no-repeat
+  :background-repeat no-repeat
+  width: 990px
+  
+  ul
+    :position absolute
+    :bottom 0
+    :right 0px
+    :padding 0
+    :margin 0
+    :list-style-type none
+  li
+
+    :float left
+    :width auto
+    :margin 0
+    :padding 0 30px
+
+    background-color: #ABC8E2
+    :font-weight bold
+    :text-align center
+
+    a
+      :color black
+      :text-decoration none
+
+    &:hover
+      :background-color #596c85
+      :color #e2e2e7
+      a:hover
+        :color white
+
+
+    &.selected
+      :background-color white
+      &:hover
+        :background-color none
+        :color black
+      a:hover
+        :color black
+                 
+#content
+  :margin 0
+  :padding 10px 30px 10px 30px
+
+///* TRANSLATE PAGE STYLES */
+//
+
+#translate
+  #input
+    :display inline-block
+    width: 400px
+  #output
+    :display inline-block
+    margin-left: 100px
+    width: 400px
+///* MAIN PAGE STYLES */
+//
+
+#main
+  
+  #index_video
+    :display none
+
+  #ad_video
+    :float right
+    color: #808080
+    :margin-bottom 10px
+
+  #genes
+    :clear both
+    width: 400px
+    :display inline-block
+    :position relative
+    :float center
+
+  #parameters
+    width: 400px
+    /*:margin-left: 100px
+    :display inline-block
+    :position relative
+    :float right
+
+  #submit
+    :clear both
+    :text-align center
+  #logos, #reference
+    :clear both
+    hr
+      :color #d9d9d9 
+    a
+      :text-decoration none 
+      img
+        :padding-left 2%
+        :padding-right 2%
+        :border 0
+        :margin 0
+  #reference
+    :font-size 0.8em
+    span.strong
+      :font-weight bold
+
+.parambox
+  :position relative
+  :width 100%
+  :margin-top 30px 
+  :margin-bottom 50px 
+  p
+    :padding-top 15px
+    :text-align justify
+
+.textarea
+  :position relative
+  :margin-top 30px
+  :margin-bottom 50px
+  :width 100%
+  height: 189px
+  h2.boxtitle
+    :left 10px
+textarea
+  height: 189px
+  :width 100%
+
+h2.boxtitle
+  :background-color white
+  :position absolute
+  :top -18px
+  :left -10px
+  :margin 0
+  :font-size 1.2em
+  /*:z-index 999
+
+a.textarea_link
+  light_color_link: #808080
+  :position absolute
+  :background-color white
+  :top -15px
+  :right 20px
+  /*:z-index 999
+
+a.toggle, a.ts, a.logratios, a.ps 
+  light_color_link: #808080
+
+#fill
+  :margin-top -40px
+
+#name
+  :margin-bottom 10px
+
+
+
+
+/* GENERAL STYLES */
+table
+  :table-layout fixed
+  :border-collapse collapse
+  font-size: 30px
+  th
+    :margin 0px
+    :padding 5px 8px 5px 8px
+    :text-align center
+    :border 1px solid white
+    :color white
+    background-color: #183152
+    :text-align center
+  td
+    :padding 8px
+    :border solid 1px black
+    color: #183152
+tr.marked 
+  td
+    background-color: #E1E6FA
+    &.name
+      :font-weight bold
+.table_scroller
+  :overflow auto
+  :border-bottom solid 1px
+#canvas
+  :float left
+  :position relative
+  width: 30px
+  :border solid 2px #596c85 
+  :cursor pointer
+h2#title
+  :margin 0 0 5px 0
+  :width auto
+a.job
+  &:visited, &:link 
+    :color blue
+    :text-decoration none
+  &:hover
+    :color red
+    :text-decoration none
+a.profile
+  :float right
+  :display inline
+  :font-size 0.7em
+
+a.geneurl
+  :float left
+  :display inline
+  &:visited, &:link 
+    :color blue
+    :text-decoration none
+  &:hover
+    :color red
+    :text-decoration none
+
+.menu_links
+  :position relative
+  .button
+    :margin 2px 5px
+
+.jobname
+  color: #ABC8E2
+#status
+  :font-style italic
+  color: #808080
+  :font-size 0.8em
+
+
+.clear_floats
+  :clear both
+
+/* spinner */
+.spinner 
+  margin: 100px auto
+  width: 40px
+  height: 40px
+  position: relative
+  text-align: center
+  
+  -webkit-animation: sk-rotate 2.0s infinite linear
+  animation: sk-rotate 2.0s infinite linear
+
+
+.dot1, .dot2 
+  width: 60%
+  height: 60%
+  display: inline-block
+  position: absolute
+  top: 0
+  background-color: #333
+  border-radius: 100%
+  
+  -webkit-animation: sk-bounce 2.0s infinite ease-in-out
+  animation: sk-bounce 2.0s infinite ease-in-out
+
+
+.dot2 
+  top: auto
+  bottom: 0
+  -webkit-animation-delay: -1.0s
+  animation-delay: -1.0s
+
+
+@-webkit-keyframes sk-rotate  100%  -webkit-transform: rotate(360deg) 
+@keyframes sk-rotate 100% transform: rotate(360deg); -webkit-transform: rotate(360deg) 
+
+@-webkit-keyframes sk-bounce 
+  0%, 100%  
+  -webkit-transform: scale(0.0)
+  50%  
+  -webkit-transform: scale(1.0)
+
+
+@keyframes sk-bounce
+  0%, 100% 
+    transform: scale(0.0)
+    -webkit-transform: scale(0.0)
+  50% 
+    transform: scale(1.0)
+    -webkit-transform: scale(1.0)
+

@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+<div class="container">
+<h1>This is my browser</h1>
+
+<form name="form1" action="query_results" method="post" onSubmit="return check()"> 
+<table width="70%"  bgcolor="#eee" border="0" cellpadding="8" cellspacing="1" align="left">
+<tr><td colspan="2" class="pathhead" align="center">Search</td></tr>
+<tr bgcolor="#FFFFFF"><td align="left" class="blackhead">Gene Symbol</td>
+<td class="bluhead"><input type="text" style="background:#FFCC99" name="symbol_name" placeholder="HSP12;ABCA1;PKRC">&nbsp;e.g.&nbsp;<a href="#">TSG101</a></td></tr>
+<tr bgcolor="#FFFFFF"><td align="center" colspan="2"><input type="submit" name="Submit" style="font-size:13px; font-weight:bold; color:red; background:#e6e6fa" value="Submit">&nbsp;&nbsp;
+<input type="reset" name="Submit2" style="font-size:13px; font-weight:bold; color:red; background:#e6e6fa" value="Clear" onClick="clearSeq()"></td></tr>
+</table>
+
+</form>
+</div>

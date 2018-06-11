@@ -1,0 +1,22 @@
+producer_class	xtools.gsea.GseaPreranked
+producer_timestamp	1528276142730
+param	collapse	false
+param	plot_top_x	20
+param	rnk	/home/rmartin/Downloads/preditest/testA.rnk
+param	norm	meandiv
+param	scoring_scheme	weighted
+param	make_sets	true
+param	mode	Max_probe
+param	gmx	/home/rmartin/Downloads/preditest/NutriGeneset.gmt
+param	gui	false
+param	rpt_label	preditest_analysis
+param	help	false
+param	out	/home/rmartin/Downloads/preditest/public
+param	include_only_symbols	true
+param	set_min	1
+param	nperm	1000
+param	rnd_seed	timestamp
+param	zip_report	false
+param	set_max	1000
+
+file	/home/rmartin/Downloads/preditest/public/preditest_analysis.GseaPreranked.1528276142730/index.html

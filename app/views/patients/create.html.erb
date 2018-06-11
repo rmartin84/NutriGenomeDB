@@ -1,0 +1,38 @@
+<%= flash[:notice] %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Results:</strong>
+
+</p>
+<% require 'csv' %>
+<% id1=params[:id1] %>
+<% sleep(10) %>
+<% target_text= File.read("results/#{@name}/gseapy_reports.csv") %>
+<% target= CSV.parse(target_text, :headers => true) %>
+
+<table>
+  <thead>
+	<tr>
+	<th>Enriched terms</th>
+	<th>ES</th>
+	<th>NES</th>
+	<th>PVAL</th>
+	<th>FDR</th>
+	<th>GENES</th>
+	</tr>
+  </thead>
+  <tbody>
+	<% target.each do |linea| %>
+	<tr>
+	<td><%= linea['Enrich_terms'] %></td>
+	<td><%= linea['es'] %></td>
+	<td><%= linea['nes'] %></td>
+	<td><%= linea['pval'] %></td>
+	<td><%= linea['fdr'] %></td>
+	<td><%= linea['genes'] %></td>
+	</tr>
+	<% end %>
+   </tbody>
+</table>
+

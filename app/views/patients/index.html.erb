@@ -1,0 +1,51 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+<div class="container">
+<div class="row" >
+<div id='main' class="col" >
+<br>
+    <form class="form-group" name="iForm" action='/' method='post' style="width: 500px" onsubmit="return validateForm()" >
+    <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+    <div id='genes' class="w-auto p-3" style="background-color: #eee;">
+      <div id='up' >
+        <h2 class='boxtitle' style="font-size: 20px">List of differentially expressed genes</h2>
+        <textarea class="form-control" id='ids_up' name='ids_up' pattern="(^\d{5}$)" style="height: 500px"></textarea>
+      </div>
+      <div id='fill'>
+        <span>Zymolyase example (yeast):</span>
+        <a class='toggle' href='/analysis' id="loadExample">[Load example]</a>
+        <a class='toggle' href='Miguel_Zymolyase'>[Results]</a>
+      </div>
+    </div>
+    <div id='parameters'>
+      <div class='parambox' id='organisms'>
+        <h2 style="font-size: 20px" class='boxtitle'>Organism</h2>
+        <p>Select organism (Currently only Homo sapiens is supported)</p>
+        <select id='organism' name='organism' required>
+		<option>Homo_sapiens</option>
+		<option>Mus_musculus</option>
+        </select>
+      </div>
+      
+    </div>
+
+   
+      <input type='submit'>
+
+    </div>
+
+  </form>
+<div id='main' class="col" >
+<br>
+<b>Tool description</b></n>
+<p align="justify">This tool is designed to identify similar experiments based on gene expression profiles. The introduced data is compared with the gene expression profiles included in NutriGenom Miner database. Results are presented as a datatable informing about the identified similar nutrigenomics experiments, the overlapping genes between the introduced expression profile and the ones hosted in the database and information about whether those genes are mostly over or under expressed. A complete guide can be found at Help page for results interpretation.</p>
+<b>Data input</b></n>
+<p>Formatted lines with gene symbol and log2 fold change expression values. Both values must be tab separated, commonly doing a copy-paste from an Excel file with differential gene expression results. We recommend a minimum of 500 lines of input in order to get meaningful results. Click on load data for an example of data input format </p>
+</div>
+</div>
+</div>
+
+

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+ <div class="navbar-inner" >
+ <div class="container" >
+  <a class="navbar-brand" href="#">
+    <%= image_tag("header.jpg", class:"img-fluid")%>
+    </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/search">Search <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/analysis">New Analysis</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/help">Help</a>
+      </li>
+    </ul>
+    <span class="navbar-text">
+      A nutrigenomics data mining platform
+    </span>
+  </div>
+</nav>
+
+
+<body >
+
+<%= yield %>
+
+</body>
+<div id='logos'>
+      <hr>
+ If you find NutriMiner useful please cite us:
+      Martin R.
+      <span class='strong'>
+        `Nuter'
+      </span>
+      <center>
+        <img src='/assets/CM_UE_spa_nuevo2015.png' height="35" width="100">
+        <a href='http://www.aa.org'>
+          <img src='/assets/' height="35" width="54"=>
+        </a>
+      </center>
+    </div>
+
+</html>
+

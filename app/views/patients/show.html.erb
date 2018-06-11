@@ -1,0 +1,44 @@
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jqc-1.12.3/dt-1.10.16/datatables.min.css"/> -->
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jqc-1.12.3/dt-1.10.16/datatables.min.css"/> -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jqc-1.12.3/dt-1.10.16/datatables.min.js"></script>
+<%= flash[:message] %>
+<h3 id="message">
+<small class="text-muted">Job processed successfully </small>
+</h3>
+
+<table class="table table-hover" id="table_results" data-order='[[ 1, "desc" ]]'>
+  <thead>
+	<tr>
+	<th>EXPERIMENT NAME</th>
+	<th  data-toggle="tooltip" title="Some tooltip text!">Genes</th>
+	<th>NES</th>
+	<th>PVAL</th>
+	<th>Analysis</th>
+	</tr>
+  </thead>
+  <tbody>
+	<% @data2.each do |linea| %>
+	<tr>
+        <td><% titulo = linea[0].split(" ",2) %>
+        <%= link_to titulo[0], "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=#{titulo[0]}", target:"_blank" %>
+        <%= titulo[1] %>
+        <%= link_to "Details", "../download/#{@job}/#{linea[0]}.xls" %></td> 
+	<td><%= linea[3] %></td>
+	<td><%= linea[5] %></td>
+	<td><%= linea[6] %></td>
+	<td> <%= link_to "Analysis", "../enrichment/#{@job}/#{linea[0]}.xls" %></td>
+	</tr>
+	<% end %>
+   </tbody>
+</table>
+
+<script>
+	jQuery().ready(() => {
+		$("#table_results").DataTable();
+	});
+</script>
