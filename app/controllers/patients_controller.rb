@@ -32,7 +32,6 @@ end
 
 	@job=params[:id]
 	@ide=params[:job]
-	puts "Mi job id #{@job}"
 	 
 	system("mv #{Rails.root}/public/$(ls -t #{Rails.root}/public  | head -1) #{Rails.root}/public/#{@job}")
 	
@@ -42,7 +41,6 @@ end
     @a2 =@a1.delete('""')
     @target||= File.read(@a2)
     @target1= CSV.parse(@target, :headers => true, :col_sep => "\t")
-    puts "#{@target1.class}"
 
     @twofiles = Dir["#{Rails.root}/public/#{@job}/gsea_report_for_*.xls"]
     @twofiles_data = @twofiles.map {|tf| CSV.read(tf)}
@@ -66,11 +64,66 @@ end
 	else 
 		redirect_to "/error"
 	end
+		system("mv #{Rails.root}/testA.rnk #{Rails.root}/public/#{@job}")
+		system("sed -i 's/-*//g' #{Rails.root}/public/#{@job}")
+
 end
 
 	# GET /patients/new
 	def new
 	end
+
+	def heatmap
+		job = params[:job]
+		q = params[:symbol_name]
+		q.upcase!
+		genes = q.gsub(";", " ")
+		genes1 = genes.inspect
+		aver = "#{Rails.root}/public/#{@job}/gsea_report_for_*.xls"
+		aver1 = aver.inspect
+		print(aver1)
+		system("/opt/python-3.6/bin/python3 heatmap.py #{genes1}")
+		#archivo = Time.now
+		render :heatmap
+		#send_file "/home/rmartin/Downloads/heatmap1.pdf", filename: "heatmap-#{archivo}.pdf", type: 'application/pdf'
+	end
+
+	def query_results
+
+		@@q = params[:symbol_name]
+		@@q.upcase!
+		if @@q.include? ";"
+		genes=@@q.split(";")
+		query = ""
+		index = 0
+		genes.each do |genes1|
+			if index == 0
+				query = "symbol = '#{genes1}'"
+			else 
+				query += "or symbol = '#{genes1}'"
+				#like '%#{genes1}%'"
+			end
+			index += 1
+		end
+		@result = Nutrigenomic.where(query)
+		else
+		@result = Nutrigenomic.where("symbol = '#{@@q}'")
+		end
+def scatter
+		genes = @@q.gsub(";", " ")
+		genes.upcase!
+		genes1 = genes.inspect
+		system("/opt/python-3.6/bin/python3 plot2.py #{genes1}")
+		#archivo = Time.now
+		#render_to_string(:file => "basic-bar.html", :layout => nil).html_safe
+		plotname = Dir.glob("./public/*").max_by {|f| File.mtime(f)}
+		plotname.gsub!("./public","")
+		#send_file "#{Rails.root}/#{plotname}", :type=> 'text/html',:disposition => 'attachment'
+		redirect_to "#{plotname}"
+	end
+
+	end
+
 
 	def home
 	end
@@ -101,54 +154,13 @@ end
 
 	 tar = File.open("testA.rnk").readlines.size
 
-if (tar < 250)&&(tar >= 150)
-        v=0
-	File.open("testA.rnk", "a+") do |f| 
- 	(1..2500).each do |i|
- 	f.puts("CACA#{v}	0.1")
-	v= v +1
-	f.puts("CACA#{v}	-0.1")
-	v= v +1	
-end 
-end
-elsif (tar < 150)&&(tar > 35)
-	v=0
-	File.open("testA.rnk", "a+") do |f| 
- 	(1..1250).each do |i|
- 	f.puts("CACA#{v}	0.1")
-	v= v +1
-	f.puts("CACA#{v}	-0.1")
-	v= v +1	
-end
-end
-elsif (tar < 650)&&(tar >= 250)
-	v=0
-	File.open("testA.rnk", "a+") do |f| 
- 	(1..3750).each do |i|
-  f.puts("CACA#{v}	0.1")
-	v= v +1
-	f.puts("CACA#{v}	-0.1")
-	v= v +1	
-end
-end
-elsif (tar < 1500)&&(tar >= 650)
-	v=0
-	File.open("testA.rnk", "a+") do |f| 
- 	(1..5000).each do |i|
- f.puts("CACA#{v}	0.1")
-	v= v +1
-	f.puts("CACA#{v}	-0.1")
-	v= v +1	
-end
-end
-end
 
 
 
 
 		require 'open3'
 			if organism == "Homo_sapiens"
-		  system("java -cp gsea2-2.2.2.jar -Xmx1024m xtools.gsea.GseaPreranked -gmx #{Rails.root}/NutriGeneset.gmt -collapse false -mode Max_probe -norm meandiv -nperm 1000 -rnk #{Rails.root}/testA.rnk -scoring_scheme weighted -rpt_label preditest_analysis -include_only_symbols true -make_sets true -plot top_x_20 -rnd_seed timestamp -set_max 1000 -set_min 1 -zip_report false -out #{Rails.root}/public") 
+		  system("java -cp gsea2-2.2.2.jar -Xmx1024m xtools.gsea.GseaPreranked -gmx #{Rails.root}/NutriGeneset.gmt -collapse false -mode Max_probe -norm meandiv -nperm 1000 -rnk #{Rails.root}/testA.rnk -scoring_scheme weighted -rpt_label preditest_analysis -include_only_symbols true -make_sets true -plot_top_x 300 -rnd_seed 21101984 -set_max 3000 -set_min 1 -zip_report false -out #{Rails.root}/public") 
 			
 			else
 			system("gseapy prerank -r test.rnk -g NutriGeneset.gmt -o results/#{@job} --min-size 0 --max-size 100000")
@@ -170,7 +182,8 @@ end
 
 		else
 		require 'csv'
-		tar1= File.read("#{Rails.root}/public/#{job}/#{nombreArchivo}.xls")
+		  if File.exist?("#{Rails.root}/public/#{job}/#{nombreArchivo}.xls")   
+	tar1= File.read("#{Rails.root}/public/#{job}/#{nombreArchivo}.xls")
         archivo=CSV.parse(tar1, :headers => true, :col_sep => "\t")
         archivo1=archivo["PROBE"]
   	    File.open("#{Rails.root}/public/#{job}/#{nombreArchivo}_genes.xls", "w") do |file1|
@@ -179,15 +192,24 @@ end
 	end
 	end
 		system("#{Rails.root}/app/assets/enrichment.sh \"#{Rails.root}/public/#{job}/#{nombreArchivo}_genes.xls\" > temporal.txt")
-					
-	end
+	
 send_file "temporal.txt", filename: "#{nombreArchivo}_geneFunction.txt", type: "application/csv"
+else
+	flash[:success] = "There was an error processing the requested file, please try another query"
+	redirect_to "/patients/#{job}"
+
+
+
 end	
+end
+end
 	def download
 		require 'csv'
 
 		 nombreArchivo  = params[:archivo1]
 		 job = params[:job]
+
+  if File.exist?("#{Rails.root}/public/#{job}/#{nombreArchivo}.xls")   
 
   tar1= File.read("#{Rails.root}/public/#{job}/#{nombreArchivo}.xls")
 
@@ -196,12 +218,28 @@ end
   	File.open("#{Rails.root}/public/#{job}/#{nombreArchivo}_genes.xls", "w") do |file1|
 	archivo1.each do |vt|	
 	file1.puts (vt)
+end
+end
+puts("hello")
+query_file = "#{Rails.root}/public/#{job}/#{nombreArchivo}_genes.xls"
+matched_file = "#{Rails.root}/db_clean/#{nombreArchivo}.xls"
+query_file1 = query_file.inspect
+matched_file1 = matched_file.inspect
+
+  nombreArchivo1 = nombreArchivo.inspect
+	system("/opt/python-3.6/bin/python3 merge.py #{query_file1} #{matched_file1} #{job} > out 2>error ")
+    system("mv #{Rails.root}/public/#{job}/results_merged.txt public/#{job}/#{nombreArchivo1}_matched.xls")
+  
+  		#render file: "prueba.xls", layout: false, content_type: "application/force-download"
+		send_file "#{Rails.root}/public/#{job}/#{nombreArchivo}_matched.xls", filename: "#{nombreArchivo}_matched.xls", type: 'application/xls'
+
+
+else
+	flash[:success] = "There was an error processing the requested file, please try another query"
+	redirect_to "/patients/#{job}"
 
 end
 end
-		#render file: "prueba.xls", layout: false, content_type: "application/force-download"
-		send_file "#{Rails.root}/public/#{job}/#{nombreArchivo}_genes.xls", filename: "#{Rails.root}/public/#{job}/#{nombreArchivo}_genes.xls", type: 'application/xls'
-	end
 
 
 	# PATCH/PUT /patients/1

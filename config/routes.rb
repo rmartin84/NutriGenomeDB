@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   get '/error' => 'patients#new'
   get '/patients/:job' => 'patients#show'
   post '/' => 'patients#create'
+  get '/query_results' => 'patients#query_results'
+  get '/scatter' => 'patients#scatter'
+  post '/heatmap'=> 'patients#heatmap'
   get '/help' => 'patients#edit'
   get '/download/:job/:archivo1' => 'patients#download'
   get '/search' => 'patients#search'
@@ -43,7 +46,7 @@ Rails.application.routes.draw do
 
   # Example resource route with sub-resources:
   #   resources :products do
-  #     resources :comments, :sales
+  #     resources :comments, :s
   #     resource :seller
   #   end
 

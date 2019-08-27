@@ -4,21 +4,37 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-
+<%= javascript_include_tag "application", "data-turbolinks-track"=> true  %>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jqc-1.12.3/dt-1.10.16/datatables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+<script rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"></script>
+<script rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css"></script>
+
 <%= flash[:message] %>
 <h3 id="message">
 <small class="text-muted">Job processed successfully </small>
 </h3>
 
 <table class="table table-hover" id="table_results" data-order='[[ 1, "desc" ]]'>
-  <thead>
+
+<div class="alert">
+<font color="bold">
+<%=flash[:success] %>
+</font>
+</div>
+  
+<thead>
 	<tr>
-	<th>EXPERIMENT NAME</th>
-	<th  data-toggle="tooltip" title="Some tooltip text!">Genes</th>
-	<th>NES</th>
-	<th>PVAL</th>
-	<th>Analysis</th>
+	<th data-toggle="tooltip" title="GEO id, Cell type, treatment and duration. Click on  Details to download the list of overlapping 
+genes between query and matched experiment">EXPERIMENT INFO</th>
+	<th  data-toggle="tooltip" title="Number of overlapping genes">Genes</th>
+	<th   data-toggle="tooltip" title="Norm Enrichment Score: informs about the portion of overexpressed (high NES)/repressed (negative NES) among the overlapping genes">NES</th>
+	<th data-toggle="tooltip" title="Launch a Panther analysis of overrepresented molecular functions among the overlapping 
+genes">Molecular Function Enrichment</th>
 	</tr>
   </thead>
   <tbody>
@@ -30,7 +46,6 @@
         <%= link_to "Details", "../download/#{@job}/#{linea[0]}.xls" %></td> 
 	<td><%= linea[3] %></td>
 	<td><%= linea[5] %></td>
-	<td><%= linea[6] %></td>
 	<td> <%= link_to "Analysis", "../enrichment/#{@job}/#{linea[0]}.xls" %></td>
 	</tr>
 	<% end %>
@@ -39,6 +54,14 @@
 
 <script>
 	jQuery().ready(() => {
-		$("#table_results").DataTable();
+		$("#table_results").DataTable(
+		{
+        dom: 'Bfrtip',
+        buttons: [
+             {extend: 'excel', filename: "NutriGenomeDB_Analysis"},
+             {extend: 'pdf', filename: "NutriGenomeDB_Analysis"}
+        ]
+    }	
+		);
 	});
 </script>

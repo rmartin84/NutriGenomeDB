@@ -10,26 +10,41 @@
 
 <div class="container">
 <br>
+<br >
+	Nutrigenomics is defined as the science studying the role of nutrients and bioactive food compounds on gene expression. Whereas the 
+idea of modulating human health by food intake is a millenial concept, the increasing number of research efforts on this field is pointing 
+out that nutrition may exert its impact on health outcomes by directly affecting the expression of genes involved in critical metabolic pathways. 
+Nowadays its widely accepted that cellular processes spanning from gene expression to protein synthesis can be regulated by dietary 
+compounds. However there is a limited understanding of the underlying molecular mechanisms which are involved. NutriGenomeDB makes use 
+of publicly available gene expression data obtained from nutrigenomics experiments in order to bring a the first platform for nutrigenomics 
+data exploration.
 <br>
-	Nutrigenomics is defined as the science studying the role of nutrients and bioactive food compounds on gene expression. Whereas the idea of modulating human health by food intake is a millenial concept, the increasing number of research efforts on this field is pointing that nutrition may exert its impact on health outcomes by directly affecting expressing on genes in critical metabolic pathways. Nowadays its widely accepted that cellular processes spanning from gene expression to protein synthesis can be regulated by dietary compounds. However there is a limited understanding of the underlying molecular mechanisms which are involved. NutriGenome Miner makes use of publicly available gene expression obtained from nutrigenomics experiments to bring a the first platform for nutrigenomics data mining.
 <br>
-<br>
-<%= image_tag("workflow.jpg", class:"row-fluid", width:"500", align:"right")%>
+<%= image_tag(asset_path("workflow.jpg"), class:"row-fluid", width:"500", align:"right")%>
 
-<p>
+<p >
 <ul style="list-style-type:square">    
-<b>Highlights of NutriGenome Miner database:</b>  
+<b>Highlights of NutriGenomeDB platform:</b>  
 <br>
 <br>
-      <li>Gene expression database</li>
-	A list of manually curated differentially expressed genes after treatment with a nutrient or bioactive food compound. Experiments were selected following specific criteria: cell based assays (human cells), experimental design with al least 2 replicates per group. the database contains data from 232 experiments available in GEO database. The database can be query by multiple Gene Symbols to look up for expression values among nutrigenomic experiments.
+      <li>Gene expression browser module</li>
+	This module is based on a set of manually curated differentially expressed genes after treatment with nutrients or 
+bioactive food compounds obtained from 231 nutrigenomics experiments. All the experiments are linked to their original source in GEO 
+database. For inclusion in NutriGenomeDB, experiments were selected following specific criteria: cell based assays (human cells) from microarray platforms,
+experimental design with al least 2 replicates per group. This module can be queried by multiple Gene Symbols to look up for differential gene expression values among nutrigenomic experiments, and the results are linked to the original data source. An interactive Lineplot visualization can be 
+obtained, allowing visual exploration of specific genes among NutriGenomeDB experiments.
 <br>
 <br>
-      <li>Analysis module</li>
-	Allowing the comparison of exogenous gene expression data with the NutriGenome miner database. These module is based on the GSEA algorithm and allows to find connections between the introduced gene expression profile and profiles included in the database. Such a connection can be quantified in two ways: the number of overlapping differentially expressed genes, and the enrichment score which informs about the direction of such a connection (mostly over or under expressed genes). Finally the analysis module allows to query the Panther database, via web-services, in order to oibtain the over-represented molecular functions among the identified connecting genes.
+      <li>Phenotype-centered analysis module</li>
+	This module allows the direct comparison of an external gene expression profile caracterizing a phenotype with the 
+experiments hosted in NutriGenomeDB database. It is based on the well documented GSEA algorithm, and its main purpose is to find 
+connections between the introduced gene expression profile and the profiles included in the database for new hypothesis generation. Such a 
+connection can be quantified in two ways: the number of overlapping differentially expressed genes, and the enrichment score which informs 
+about the direction of such a connection (over or under expressed genes). Finally this  module allows to query Panther database, 
+via web-services, in order to obtain the over-represented molecular functions among the identified connecting genes.
 <br>
 <br>
-      <li>Data submission</li>
+      <li>Data download and new data submission</li>
 	We encourage researchers to provide us with newly generated nutrigenomics data for inclusion in our database.
 </ul>
 </p>

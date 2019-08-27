@@ -3,9 +3,137 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
+<div class="container">
 
-<h1>This is the help page</h1>
 
-<h2>Got to write thr help page</h2>
+<br>
+<br>
 
-<%= link_to 'Back', patients_path %>
+<b>Help for users to get started with NutrigeneDB and results interpretation</b>
+
+
+<br>
+<br>
+
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+	<h5> <b> Gene-centered analysis </b></h5>
+        </button>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+      <div class="card-body">
+        <p>
+This module allows the exploration of differentially expressed genes accross nutrigenomics experiments. An exhaustive search of microarray gene expression assays on human cells in response to nutrients and bioactive food compounds was performed on GEO database. All the experiments included in NutriGenome DB are defined by a list of the top 10% differentially expressed genes, sorted by adjusted p-value. NutriGenome DB contains data generated among 32 different microarray platforms. As those platforms differ widely in characteristics such as the number of targets and available annotations, the number of genes defining each experiment may vary between 1500 and 3000.<br>
+Users can look if a gene appears as differentially expressed among our collection of nutrigenomics experiments by introducing in the search box one or multiple human Gene Symbols. It is a exact match search, please pay attention to <b>spelling and capitalization. </b>Results are presented as a sortable table with log2 fold change values relative to the control, average expression levels, statistics and information about the target experiment, which is directly linked to the data source in GEO database.
+
+<br>
+<br>
+<%= image_tag("help_search.png", :size => "1000x422", :style => "border: 2px solid black")%>
+<p><u>Search results table:</u> The introduced genes are described by their expression level, statistical information and the source experiment. The experiment column contains the corresponding <b>GEO id</b> (link for further examination) as well as a brief summary; <b>human cell type, compound and treatment duration </b>. Each column is sortable, and the Search box on the top right allows for gene selection in case of a multiple gene search. Number of shown entries can also be tuned.</p>
+
+
+</p>
+
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+	<h5> <b> Phenotype-centered analysis </b></h5> 
+        </button>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+      <div class="card-body">
+        This module allows users to find functional connections between their phenotype of interest and experiments included in NutriGenomeDB by comparing gene expression profiles. NutriGenomeDB (v.1.1) contains 231 gene expression profiles of human cells exposed to more than 140 different nutrients and bioactive food compounds. This analysis module is built upon the widely used pattern-matching algorithm Gene Set Enrichment Analysis (GSEA). The Nutrigenomic Gene Sets included in NutriGenomeDB are defined as the top 10% differentially expressed genes in the included nutrigenomics experiments (sorted by adjusted p-value). Therefore this tools allows users to find functional connections between a list of differentially expressed genes resulting from a phenotype of interest, with the Nutrigenomic Gene Sets defining different treatments with nutrients and bioactive food compounds available. <br>
+<br>
+<b>Required data input </b>: the Analysis tool expects as input a list of human Gene Symbols and their differential expression values (in log2 scale) separated by tabulator. This is the typical output from a gene differential expression experiment; from an Excel file, the corresponding Gene symbol and logFC columns should be copy-pasted directly into the application text box. Example data can be loaded by clicking at the bottom of the text box <b> (Load Example) </b>. The application automatically handles missing values (NA) and duplicated gene symbols in the data input. We recommend to perform queries with a minimum number of 500 genes and their fold change values in order to obtain meaningfull results.
+
+<br>
+<br>
+<%= image_tag("analysis_tool.png", :size => "1000x422", :style => "border: 2px solid black")%>
+<p><u>Analysis results table:</u> The resulting experiments are defined by their <b>GEO id</b> (link for further examination) as well as a brief description; <b>human cell type, compound and treatment information (compound concentration and duration) </b>. By clicking on "Details" link, users can download the list of overlapping genes between the query and matching experiments. Each column is sortable by Genes (number of overlapping genes), NES (Normalized Enrichment score; a high NES means that among the overlapping genes, a high portion of those are overexpressed in the query and the matching experiment, viceversa for a negative NES). The <b>Analysis</b> link allows users to perform a functional enrichment of overrepresented molecular functions among the overlapping genes. Search box on the top left allows users to browse for compounds or GEO id among the results.</p>
+
+<br>
+<br>
+By clicking on the <b> Analysis </b> link, users are allowed to perform a functional enrichment analysis of the overlapping genes that connect the gene expression query and matched experiments from NutriGenomeDB. Via a java web-service, Panther database is interrogated for overrepresented molecular functions that characterize those overlapping genes. In this way users can get further insights into the functional connections highlighted by this analysis tool at molecular level.
+
+<br>
+<br>
+<%= image_tag("enrichment.png", :size => "1000x422", :style => "border: 2px solid black")%>
+<p><u>Functional enrichment results:</u> Results are grouped by genes belonging to the same GO Molecular Function. Information about statistics of the overrepresentation test are provided in the P-value and FDR columns.</p>
+
+</p>
+
+
+      </div>
+    </div>
+  </div>
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingFour">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+	<h5> <b> Submitting new data to NutriGenomeDB</b></h5>
+        </button>
+      </h5>
+    </div>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+      <div class="card-body">
+        <p>
+The aim of NutriGenomeDB is to become a central hub of information related to nutrigenomics, by expanding its available gene expression data in order to create an useful and growing ressource for the cientific community. Therefore we encourage researchers to submit their data related to nutrigenomics experiments performed on human cell for inclusion in NutriGenomeDB. Please write us an <a href= "mailto: roberto.martin@imdea.org"> email</a> for further enquiries.
+
+</p>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<br>
+<strong> Browser compatibility</strong>
+<table border= "1">
+<tbody>
+<tr>
+<td><strong>OS</strong></td>
+<td><strong>Version</strong></td>
+<td><strong>Chrome</strong></td>
+<td><strong>Firefox</strong></td>
+<td><strong>IE</strong></td>
+<td><strong>Safari</strong></td>
+</tr>
+<tr>
+<td>Linux</td>
+<td>Ubuntu 16.04</td>
+<td>not tested</td>
+<td>49.0</td>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>Windows</td>
+<td>10</td>
+<td>71.0</td>
+<td>57.0</td>
+<td>11.0</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>MacOS</td>
+<td>HighSierra</td>
+<td>not tested</td>
+<td>61.0</td>
+<td>n/a</td>
+<td>12.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>

@@ -16,3 +16,4 @@
 //= require turbolinks
 //= require csi.min
 //= require_tree .
+//= require ./marq.js

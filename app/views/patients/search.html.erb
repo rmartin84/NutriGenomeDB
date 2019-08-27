@@ -3,17 +3,60 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
-<div class="container">
-<h1>This is my browser</h1>
 
-<form name="form1" action="query_results" method="post" onSubmit="return check()"> 
-<table width="70%"  bgcolor="#eee" border="0" cellpadding="8" cellspacing="1" align="left">
-<tr><td colspan="2" class="pathhead" align="center">Search</td></tr>
-<tr bgcolor="#FFFFFF"><td align="left" class="blackhead">Gene Symbol</td>
-<td class="bluhead"><input type="text" style="background:#FFCC99" name="symbol_name" placeholder="HSP12;ABCA1;PKRC">&nbsp;e.g.&nbsp;<a href="#">TSG101</a></td></tr>
-<tr bgcolor="#FFFFFF"><td align="center" colspan="2"><input type="submit" name="Submit" style="font-size:13px; font-weight:bold; color:red; background:#e6e6fa" value="Submit">&nbsp;&nbsp;
+
+<div class="container">
+<form name="form1" action="query_results" method="get" onSubmit="return validateForm2()"> 
+<table width="100%"  bgcolor="#eee" border="0" cellpadding="18" cellspacing="1" align="left">
+<tr><td colspan="5" class="pathhead" align="center" color="white"><h2>Search for Gene Expression data in the database</h2></td></tr>
+<tr bgcolor="#FFFFFF"><td align="left"></td>
+<td align="center" class="bluhead"><input type="text" size="50" style="background:#B9EED0" id= "symbol_db" name="symbol_name" placeholder="Type Gene Symbols separated by a semicolon">&nbsp;e.g.&nbsp;<a>NPC1L1;APOA1</a></td></tr>
+<tr bgcolor="#FFFFFF"><td align="center" colspan="2"><input type="submit" style="font-size:13px; font-weight:bold; color:red; background:#e6e6fa" value="Submit">&nbsp;&nbsp;
+<input type="reset" name="Submit2" style="font-size:13px; font-weight:bold; color:red; background:#e6e6fa" value="Clear" onClick="clearSeq()"></td></tr>
+</table>
+</form>
+
+<form name="form2" action="heatmap" method="post" onSubmit="return validateForm3()"> 
+<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+<table width="100%"  bgcolor="#eee" border="0" cellpadding="18" cellspacing="1" align="left">
+<tr><td colspan="5" class="pathhead" align="center" color="white"><h2>Generate expression heatmap</h2></td></tr>
+<tr bgcolor="#FFFFFF"><td align="left"></td>
+<td align="center" class="bluhead"><input type="text" size="50" style="background:#B9EED0" id= "symbol_heat" name="symbol_name" placeholder="Type Gene Symbols separated by a semicolon">&nbsp;e.g.&nbsp;<a>NPC1L1;APOA1</a></td></tr>
+<tr bgcolor="#FFFFFF"><td align="center" colspan="2"><input type="submit" style="font-size:13px; font-weight:bold; color:red; background:#e6e6fa" value="Submit">&nbsp;&nbsp;
 <input type="reset" name="Submit2" style="font-size:13px; font-weight:bold; color:red; background:#e6e6fa" value="Clear" onClick="clearSeq()"></td></tr>
 </table>
 
 </form>
-</div>
+      <div id='fill'>
+        <span>Cholesterol metabolism example:</span>
+        <a class='toggle' href='/analysis' id="loadHeat">[Load example]</a>
+      </div>
+
+<script>
+
+jQuery().ready(function() {
+
+  jQuery("#loadHeat").click(function fill_ids(evt){
+    evt.preventDefault(); 
+
+    var heat = "ABCA1;ABCG1;ABCG5;ABCG8; NPC1L1;APOB;APOA1;LDLR;NPC1L1;APOA1;NR1H1;SCARB1";
+    $("#symbol_heat").val(heat);
+  });
+
+});
+
+function validateForm3(){
+	if( $("#symbol_heat").val() == '') {
+		alert('Please introduce at least 2 Gene Symbols separated by a semicolon');
+		return false;
+	}
+	return true;
+} 
+function validateForm2(){
+	if( $("#symbol_db").val() == '') {
+		alert('Please introduce at least 1 Gene Symbol');
+		return false;
+	}
+	return true;
+} 
+</script>

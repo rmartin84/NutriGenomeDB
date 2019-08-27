@@ -1,5 +1,0 @@
-require 'csv'
-target_text= File.read("results/Anton1/gseapy_reports.csv")
-target= CSV.parse(target_text, :headers => true)
-puts target['genes']
-

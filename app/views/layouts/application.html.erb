@@ -1,10 +1,17 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
+<head>
+ <title>NutriGenomeDB: A nutrigenomics exploratory and analytical platform</title>
+ <meta charset="UTF-8">
+  <meta name="description" content="Nutrigenomics data mining platform">
+  <meta name="keywords" content="Nutrigenomics,Genyal,NutrigenomeDB, Nutrigenomcis database">
+</head>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
  <div class="navbar-inner" >
  <div class="container" >
   <a class="navbar-brand" href="#">
-    <%= image_tag("header.jpg", class:"img-fluid")%>
+    <%=  image_tag(asset_path("headerdef.png") , class:"img-fluid") %>
+
     </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -15,18 +22,21 @@
         <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/search">Search <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/search">Gene expression browser<span 
+class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/analysis">New Analysis</a>
+        <a class="nav-link" href="/analysis">Phenotype-centered analysis</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/help">Help</a>
+        <a class="nav-link" href="/nutrigenomeDB_manual.pdf" target="_blank">Help</a>
       </li>
     </ul>
     <span class="navbar-text">
-      A nutrigenomics data mining platform
+      A nutrigenomics exploratory and analytical platform
     </span>
+  </div>
+    </div>
   </div>
 </nav>
 
@@ -38,18 +48,52 @@
 </body>
 <div id='logos'>
       <hr>
- If you find NutriMiner useful please cite us:
-      Martin R.
-      <span class='strong'>
-        `Nuter'
-      </span>
-      <center>
-        <img src='/assets/CM_UE_spa_nuevo2015.png' height="35" width="100">
-        <a href='http://www.aa.org'>
-          <img src='/assets/' height="35" width="54"=>
+<b> If you find NutriGenomeDB useful please cite us:</b><br>
+   <font size="2"> <a 
+href='https://www.sciencedirect.com/science/article/pii/S1756464618300288' 
+target="_blank"> Data 
+mining of nutrigenomics experiments: Identification of a cancer protective gene signature 
+</a>. Martín-Hernández R., Reglero G., Dávalos A. The Journal of Functional Foods 2018, 42, 380-386.</font>
+<br>
+<br>
+       <center>
+ <a href='http://www.food.imdea.org' target="_blank">
+        <%=  image_tag(asset_path("imdea_logo.png") ,:size=> "128x80", :hspace=> "50", :vspace=>"50",class:"img-fluid") %>
         </a>
+ <%=  image_tag(asset_path("genyal.png") ,:size=> "231x80", :vspace=>"50", class:"img-fluid") %>
       </center>
     </div>
 
 </html>
+
+<script>
+function validateForm(){
+	const pattern = /^(\w|\d|\.|-)+\t-?\d+(\.\d+)?$/;
+	const lineas = $("#ids_up").val().split("\n");
+	var error = false;
+	const valido = lineas.reduce ((inicial, linea) => {
+		const resultado =  inicial && (linea == '' || linea.match(pattern));
+		if(!resultado && !error) {
+		error = true;
+			console.error(linea);
+		}
+		return resultado;
+	} , true);
+	
+	
+	if( $("#ids_up").val() == '') {
+		alert('Please introduce data to analyze in the correct format');
+		return false;
+	}
+	else if(!valido){
+		alert("Wrong data pattern! Gene symbols and logFC expression values must be tab separated. More information can be found at Help");
+return false;
+	console.log("hello"); 
+	}
+	console.log("hello"); 
+		$("#main").hide();
+		$("#waiting_gif").show();
+	return true;
+} 
+</script>
 

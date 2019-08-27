@@ -1,0 +1,1 @@
+java -cp gsea2-2.2.2.jar -Xmx1024m xtools.gsea.GseaPreranked -gmx NutriGeneset.gmt -collapse false -mode Max_probe -norm meandiv -nperm 10 -rnk testA.rnk -scoring_scheme weighted -rpt_label preditest_analysis -include_only_symbols true -make_sets true -plot_top_x 80 -rnd_seed 21101984 -set_max 3000 -set_min 1 -zip_report false -out public
