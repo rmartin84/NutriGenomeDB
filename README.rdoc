@@ -1,5 +1,5 @@
 NutriGenomeDB
 
-To run NutriGenomeDB web application locally, you will need an installation of Ruby v.2.2.10p489 or later on a Linux environment, and also a wortking python3 installation. Gem dependencies can be found at the GemFile. It uses a SQL database, which can be populated with the current version of the Nutrigenomics database available in the provided sql file.
+To run NutriGenomeDB web application locally, you will need an installation of Ruby v.2.2.10p489 or later on a Linux environment, and also a working python3 installation. Gem dependencies can be found at the GemFile. It uses a SQL database, which can be populated with the current version of the Nutrigenomics database available in the provided sql file.
 NutriGenomeDB was developped at the Bioinformatics and Biostatistics Unit of IMDEA Food Institute (Madrid, Spain) This application uses third party software. NutriGenomeDB license and third-party licenses are in the LICENSES directory.
 Please contact us for support, licensing questions, comments, and suggestions.
