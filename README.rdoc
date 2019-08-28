@@ -4,4 +4,4 @@ To run NutriGenomeDB web application locally, you will need an installation of R
 NutriGenomeDB was developped at the Bioinformatics and Biostatistics Unit of IMDEA Food Institute (Madrid, Spain) This application uses third party software. NutriGenomeDB license and third-party licenses are in the LICENSES directory.
 
 <a href="mailto:roberto.martin@imdea.org">contact us</a>for support, licensing questions, comments, and suggestions.
-using [mailto](mailto:email@noise.com)
+using <email@noise.com>
