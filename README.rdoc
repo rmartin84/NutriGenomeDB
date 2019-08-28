@@ -5,3 +5,4 @@ NutriGenomeDB was developped at the Bioinformatics and Biostatistics Unit of IMD
 
 <a href="mailto:roberto.martin@imdea.org">contact us</a>for support, licensing questions, comments, and suggestions.
 using <email@noise.com>
+<p><a href="mailto:user@example.com">Send email</a></p>
